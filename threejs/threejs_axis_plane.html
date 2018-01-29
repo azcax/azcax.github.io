@@ -1,0 +1,77 @@
+<html>
+	<head>
+		<title>Three js Line</title>
+		<style>
+			body { margin: 0; }
+			canvas { width: 100%; height: 100% }
+		</style>
+		<script src="../js/three.min.js"></script>
+	</head>
+	<body>
+<script>
+
+threejs_axis_plane();
+function threejs_axis_plane()
+{
+	// step1: how to create scene
+	var scene = new THREE.Scene();
+	
+	// step2: how to create camera
+	var camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, .1, 500)
+	camera.position.set(40,40,40);
+	camera.lookAt(scene.position);
+	
+	// step3: how to create renderer
+	var renderer = new THREE.WebGLRenderer();
+	renderer.setClearColor(0xdddddd);
+	renderer.setSize(window.innerWidth, window.innerHeight);
+	renderer.shadowMap.enabled = true;
+	renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+	
+	// step4: how to create axis
+	var axis = new THREE.AxisHelper(10);
+	scene.add(axis);
+	
+	// step5: how to create color
+	var color = new THREE.Color("rgb(255, 0, 0)");
+	
+	// step6: how to create grid
+	var grid = new THREE.GridHelper(50,5,color,0x000000);
+	scene.add(grid);
+	
+	// step7: how to create cube
+	var cubeGeo = new THREE.BoxGeometry(5,5,5);
+	var cubeMaterial = new THREE.MeshLambertMaterial({color:0xff3300});
+	var cube = new THREE.Mesh(cubeGeo,cubeMaterial);
+	cube.position.set(2.5,2.5,2.5);
+	cube.castShadow = true;
+	cube.receiveShadow = false;
+	scene.add(cube);
+	
+	// step8: how to create plane
+	var planeGeo = new THREE.PlaneGeometry(30,30,30);
+	var planeMaterial = new THREE.MeshLambertMaterial({color:0x00ff00});
+	var plane = new THREE.Mesh(planeGeo,planeMaterial);
+	plane.rotation.x = -.5*Math.PI;
+	plane.receiveShadow = true;
+	scene.add(plane);
+
+	// step9: how to create spot light
+	var spotLight = new THREE.SpotLight(0xffffff);
+	spotLight.position.set(15,30,50);
+	spotLight.castShadow = true;
+	spotLight.shadow.mapSize.width = 512;
+	spotLight.shadow.mapSize.height = 512;
+	spotLight.shadow.camera.near = 0.5;
+	spotLight.shadow.camera.far = 500;
+	scene.add(spotLight);
+
+	// step10: how to append renderer on canvas
+	document.body.appendChild( renderer.domElement );
+	
+	// step11: how to render scene and camera
+	renderer.render(scene,camera);
+}
+</script>
+</body>
+</html>
