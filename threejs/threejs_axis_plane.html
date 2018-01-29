@@ -60,16 +60,12 @@ function threejs_axis_plane()
 	var spotLight = new THREE.SpotLight(0xffffff);
 	spotLight.position.set(15,30,50);
 	spotLight.castShadow = true;
-	spotLight.shadow.mapSize.width = 512;
-	spotLight.shadow.mapSize.height = 512;
-	spotLight.shadow.camera.near = 0.5;
-	spotLight.shadow.camera.far = 500;
 	scene.add(spotLight);
 
 	// step10: how to append renderer on canvas
 	document.body.appendChild( renderer.domElement );
 	
-	// step11: how to render scene and camera
+	// step11: how to render scene with camera
 	renderer.render(scene,camera);
 }
 </script>
