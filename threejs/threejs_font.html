@@ -9,6 +9,7 @@
     </style>
 		<script src="../js/three.min.js"></script>
 		<script src="../js/dat.gui.min.js"></script>
+		<script src="../js/controls/OrbitControls.js"></script>
 	</head>
 	<body>
 	<div id ="webGL-container"></div>
@@ -48,10 +49,10 @@ function threejs_clock()
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.shadowMap.enabled = false;
 		renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-/*        
+        
         controls = new THREE.OrbitControls( camera, renderer.domElement );
         controls.addEventListener( 'change', render );
-
+/*
         guiControls = new function(){
             this.SceneToConsole= function(){
                 console.log(scene);
