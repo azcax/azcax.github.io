@@ -197,8 +197,9 @@ function threejs_clock()
             sArray[i].position.set(10,0,0);
         }
         
-        for (var e = 0; e < 24; e++){
-            hArray[e] = new THREE.Mesh( new THREE.TextGeometry(setZeros(e), {font: font, size:5, height:1, name: i + 'h'}));//, mat);
+        for (var e = 0; e < 24; e++)
+		{
+            hArray[e] = new THREE.Mesh( new THREE.TextGeometry(setZeros(e), {font: font, size:5, height:1, name: e + 'h'}));//, mat);
             hArray[e].position.set(-10,0,0);     
         }      
 		
