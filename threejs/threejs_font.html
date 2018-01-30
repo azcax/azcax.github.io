@@ -189,17 +189,17 @@ function threejs_clock()
 			var font = response;
 			for (var i = 0; i < 60; i++)
 			{
-				mArray[i] = new THREE.Mesh( new THREE.TextGeometry(':' + setZeros(i), {font: font, size:5, height:1}));//, mat);
+				mArray[i] = new THREE.Mesh( new THREE.TextGeometry(':' + setZeros(i), {font: font, size:5, height:1}), mat);
 				mArray[i].name = i +'m';
 				mArray[i].position.set(0,0,0);           
 			
-				sArray[i] = new THREE.Mesh( new THREE.TextGeometry(':' + setZeros(i), {font: font, size:5, height:1}));//, mat);
+				sArray[i] = new THREE.Mesh( new THREE.TextGeometry(':' + setZeros(i), {font: font, size:5, height:1}), mat);
 				sArray[i].name = i + 's';
 				sArray[i].position.set(10,0,0);
 			}
 			for (var e = 0; e < 24; e++)
 			{
-				hArray[e] = new THREE.Mesh( new THREE.TextGeometry(setZeros(e), {font: font, size:5, height:1}));//, mat);
+				hArray[e] = new THREE.Mesh( new THREE.TextGeometry(setZeros(e), {font: font, size:5, height:1}), mat);
 				hArray[e].name = e + 'h';
 				hArray[e].position.set(-10,0,0);
 			}      
