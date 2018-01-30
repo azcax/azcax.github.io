@@ -90,7 +90,7 @@ function threejs_clock()
         scene.add(hemi);
 
         createMeshes();
-        checkTime(prevHour, prevMin, prevSec);
+        checkTime();
         
         // adds spot light with starting parameters
         spotLight = new THREE.SpotLight(0xffffff);
@@ -184,26 +184,25 @@ function threejs_clock()
 		var color = new THREE.Color("rgb(255, 0, 0)");
         var mat = new THREE.MeshPhongMaterial( { color: 0xff9000 } );
 		var loader = new THREE.FontLoader();
-		loader.load( '../fonts/' + fontName + '_' + fontWeight + '.typeface.json', function ( response ) {
-		var font = response;
-		
-		for (var i = 0; i < 60; i++){
-            
-            mArray[i] = new THREE.Mesh( new THREE.TextGeometry(':' + setZeros(i), {font: font, size:5, height:1}));//, mat);
-            mArray[i].name = i +'m';
-            sArray[i] = new THREE.Mesh( new THREE.TextGeometry(':' + setZeros(i), {font: font, size:5, height:1}));//, mat);
-            sArray[i].name = i + 's';
-            mArray[i].position.set(0,0,0);             
-            sArray[i].position.set(10,0,0);
-        }
-        
-        for (var e = 0; e < 24; e++)
+		loader.load( '../fonts/' + fontName + '_' + fontWeight + '.typeface.json', function ( response )
 		{
-            hArray[e] = new THREE.Mesh( new THREE.TextGeometry(setZeros(e), {font: font, size:5, height:1}));//, mat);
-			hArray[e].name = e + 'h';
-            hArray[e].position.set(-10,0,0);
-        }      
-		
+			var font = response;
+			for (var i = 0; i < 60; i++)
+			{
+				mArray[i] = new THREE.Mesh( new THREE.TextGeometry(':' + setZeros(i), {font: font, size:5, height:1}));//, mat);
+				mArray[i].name = i +'m';
+				mArray[i].position.set(0,0,0);           
+			
+				sArray[i] = new THREE.Mesh( new THREE.TextGeometry(':' + setZeros(i), {font: font, size:5, height:1}));//, mat);
+				sArray[i].name = i + 's';
+				sArray[i].position.set(10,0,0);
+			}
+			for (var e = 0; e < 24; e++)
+			{
+				hArray[e] = new THREE.Mesh( new THREE.TextGeometry(setZeros(e), {font: font, size:5, height:1}));//, mat);
+				hArray[e].name = e + 'h';
+				hArray[e].position.set(-10,0,0);
+			}      
 		} );   
     }
 
@@ -283,7 +282,7 @@ function threejs_clock()
         spotLight.position.y = guiControls.lightY;
         spotLight.position.z = guiControls.lightZ;
 */
-        checkTime(prevHour, prevMin, prevSec);
+        checkTime();
     }
     
     function animate(){
