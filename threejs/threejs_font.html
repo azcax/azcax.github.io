@@ -209,56 +209,47 @@ function threejs_clock()
     function checkHour(){
         
         var curTime = new Date();
-        
-        if (prevHour != curTime.getHours() || prevHour == null){
-            
-
-            if (typeof hArray[prevHour] != "undefined"){                
-                scene.remove( hArray[prevHour]);
-              
-            }
-                 
-            prevHour = curTime.getHours();
-            
-            scene.add( hArray[prevHour] );
+        if(prevHour != curTime.getHours())
+		{
+            if( hArray.length > prevHour )
+			{             
+				scene.remove( hArray[prevHour]);
+				prevHour = curTime.getHours();
+				if( hArray.length > prevHour )
+					scene.add( hArray[prevHour] );
+			}
         }  
         
     }
     
     
-    function checkMin(){
-         
+    function checkMin()
+	{
         var curTime = new Date(); 
-        
-        if (prevMin != curTime.getMinutes() || prevMin == null){
-                        
-            if (typeof mArray[prevMin] != "undefined"){                
+        if (prevMin != curTime.getMinutes())
+		{
+            if( mArray.length > prevMin )
+			{			              
                 scene.remove( mArray[prevMin]);
-               
-            }
-            
-            prevMin = curTime.getMinutes();
-                      
-            scene.add( mArray[prevMin] );
-            
-        }        
-                       
+				prevMin = curTime.getMinutes();
+				if( mArray.length > prevMin )
+					scene.add( mArray[prevMin] );
+			}
+		}
     }
     
-    function checkSec(){
-        
+    function checkSec()
+	{
         var curTime = new Date();
-        
-        if (prevSec != curTime.getSeconds() || prevSec == null){
-
-            if (typeof sArray[prevSec] != "undefined"){                
+        if (prevSec != curTime.getSeconds())
+		{
+			if( sArray.length > prevSec )
+			{			
                 scene.remove( sArray[prevSec]);
+				prevSec = curTime.getSeconds();
+				if (prevSec != curTime.getSeconds())
+					scene.add( sArray[prevSec] );
             }
-            
-            prevSec = curTime.getSeconds();
-            
-            scene.add( sArray[prevSec] );
-            
         }         
     }
     
