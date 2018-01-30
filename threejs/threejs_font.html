@@ -36,7 +36,7 @@ function threejs_clock()
         scene = new THREE.Scene();
 		
 		// how to create and set camera
-        camera =  new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, .1, 500);
+        camera =  new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, .1, 1500);
 		camera.position.x = -13;
         camera.position.y = 10;
         camera.position.z = 17.7;   
@@ -179,8 +179,8 @@ function threejs_clock()
     /*creates all the different time meshes*/
     function createMeshes()
 	{
-		var fontName = "optimer"; // helvetiker, optimer, gentilis, droid sans, droid serif
-		var fontWeight = "bold"; // normal bold
+		var fontName = "optimer";
+		var fontWeight = "bold";
 		var color = new THREE.Color("rgb(255, 0, 0)");
         var mat = new THREE.MeshPhongMaterial( { color: 0xff9000 } );
 		var loader = new THREE.FontLoader();
@@ -285,7 +285,7 @@ function threejs_clock()
     
     init();
     animate();
-    
+/*   
     //$(window).resize(function(){
         SCREEN_WIDTH = window.innerWidth;
         SCREEN_HEIGHT = window.innerHeight;
@@ -293,7 +293,7 @@ function threejs_clock()
         camera.updateProjectionMatrix();
         renderer.setSize( SCREEN_WIDTH, SCREEN_HEIGHT );
     //});
-    
+*/    
 }
 </script>
 </body>
