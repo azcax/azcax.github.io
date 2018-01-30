@@ -248,8 +248,8 @@ function threejs_clock()
 			{			
                 scene.remove( sArray[prevSec]);
 				prevSec = curTime.getSeconds();
-				if (prevSec != curTime.getSeconds())
-					scene.add( sArray[prevSec] );
+				//if (prevSec != curTime.getSeconds())
+				scene.add( sArray[prevSec] );
             }
         }         
     }
