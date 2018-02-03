@@ -105,11 +105,15 @@ $(function(){
         spotLight.position.y = lightY;
         spotLight.position.z = lightZ;
 
-        if ( animation ) {
-            var time = Date.now();
-            animation.update( (time - prevTime)/3 );
-            prevTime = time;
-        }        
+        if ( mixer ) {
+
+					var time = Date.now();
+
+					mixer.update( ( time - prevTime ) * 0.001 );
+
+					prevTime = time;
+
+				}        
     }
     
     function animate(){
