@@ -92,9 +92,10 @@ $(function(){
         model = new THREE.Mesh( geometry, material );
         model.scale.set (10,10,10);
         scene.add( model );
-        
-        animation = new THREE.MorphAnimation( model );
-        animation.play();
+		
+		mixer = new THREE.AnimationMixer( model );
+		var clip = THREE.AnimationClip.CreateFromMorphTargetSequence( 'gallop', geometry.morphTargets, 30 );
+		mixer.clipAction( clip ).setDuration( 1 ).play();
     }
     
     var prevTime = Date.now();
