@@ -43,6 +43,25 @@
     var SCREEN_WIDTH, SCREEN_HEIGHT;
     var mouse, raycaster;
     var objects = [];
+	
+	var rotationX  = 0.0;
+	var rotationY  = 0.0;
+	var rotationZ  = 0.0;           
+	var lightX = 19;
+	var lightY = 47;
+	var lightZ = 19;
+	var intensity = .5;        
+	var distance = 373;
+	var angle = 1.6;
+	var exponent = 38;
+	var shadowCameraNear = 34;
+	var shadowCameraFar = 2635;
+	var shadowCameraFov = 68;
+	var shadowCameraVisible=false;
+	var shadowMapWidth=512;
+	var shadowMapHeight=512;
+	var shadowBias=0.00;
+	var shadowDarkness=0.11;
 
     function init(){
         $(".popup").hide();
@@ -74,16 +93,16 @@
         spotLight = new THREE.SpotLight(0xffffff);
         spotLight.castShadow = false;
         spotLight.position.set (20, 35, 40);
-        spotLight.intensity = guiControls.intensity;        
-        spotLight.distance = guiControls.distance;
-        spotLight.angle = guiControls.angle;
-        spotLight.exponent = guiControls.exponent;
-        spotLight.shadowCameraNear = guiControls.shadowCameraNear;
-        spotLight.shadowCameraFar = guiControls.shadowCameraFar;
-        spotLight.shadowCameraFov = guiControls.shadowCameraFov;
-        spotLight.shadowCameraVisible = guiControls.shadowCameraVisible;
-        spotLight.shadowBias = guiControls.shadowBias;
-        spotLight.shadowDarkness = guiControls.shadowDarkness;
+        spotLight.intensity = intensity;        
+        spotLight.distance = distance;
+        spotLight.angle = angle;
+        spotLight.exponent = exponent;
+        spotLight.shadowCameraNear = shadowCameraNear;
+        spotLight.shadowCameraFar = shadowCameraFar;
+        spotLight.shadowCameraFov = shadowCameraFov;
+        spotLight.shadowCameraVisible = shadowCameraVisible;
+        spotLight.shadowBias = shadowBias;
+        spotLight.shadowDarkness = shadowDarkness;
         scene.add(spotLight);
 
         //load blender scene
@@ -145,9 +164,9 @@
         
     }    
     function render() { 
-        spotLight.position.x = guiControls.lightX;
-        spotLight.position.y = guiControls.lightY;
-        spotLight.position.z = guiControls.lightZ;
+        spotLight.position.x = lightX;
+        spotLight.position.y = lightY;
+        spotLight.position.z = lightZ;
         scene.rotation.y += .001;
     }
     
