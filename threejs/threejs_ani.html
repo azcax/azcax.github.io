@@ -1,0 +1,134 @@
+<html>
+<title> Our WebGL Skeleton Framework</title>
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/three.min.js"></script>
+<script type="text/javascript" src="../js/controls/OrbitControls.js"></script>      
+    <style>
+        body{
+            margin:0;
+            overflow:hidden;
+        }
+    </style>
+    <body>
+    <div id ="webGL-container"></div>
+	<script>
+$(function(){
+
+    /*global variables*/
+    var scene, camera, renderer;
+    var spotLight, hemi;
+    var SCREEN_WIDTH, SCREEN_HEIGHT;
+    var loader, model, animation;
+	
+	var rotationX  = 0.0;
+	var rotationY  = 0.0;
+	var rotationZ  = 0.0;
+	var lightX = 19;
+	var lightY = 47;
+    var lightZ = 19;
+    var intensity = 2.5;       
+    var distance = 373;
+    var angle = 1.6;
+    var exponent = 38;
+    var shadowCameraNear = 34;
+    var shadowCameraFar = 2635;
+    var shadowCameraFov = 68;
+    var shadowCameraVisible=false;
+    var shadowMapWidth=512;
+    var shadowMapHeight=512;
+    var shadowBias=0.00;
+    var shadowDarkness=0.11;       
+    
+    function init(){
+        /*creates empty scene object and renderer*/
+        scene = new THREE.Scene();
+        camera =  new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, .1, 500);
+        renderer = new THREE.WebGLRenderer({antialias:true});
+        
+        renderer.setClearColor(0x66C2FF);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.shadowMapEnabled= true;
+        renderer.shadowMapSoft = true;
+        
+        /*add controls*/
+        controls = new THREE.OrbitControls( camera, renderer.domElement );
+        controls.addEventListener( 'change', render );
+                    
+        camera.position.x = 0;
+        camera.position.y = 0;
+        camera.position.z = 60; 
+        camera.lookAt(scene.position);
+        hemi = new THREE.HemisphereLight(0xbbbbbb, 0x0099FF);
+        scene.add(hemi);
+        
+        /*adds spot light with starting parameters*/
+        spotLight = new THREE.SpotLight(0xffffff);
+        spotLight.castShadow = true;
+        spotLight.position.set (20, 35, 40);
+        spotLight.intensity = intensity;        
+        spotLight.distance = distance;
+        spotLight.angle = angle;
+        spotLight.exponent = exponent;
+        spotLight.shadowCameraNear = shadowCameraNear;
+        spotLight.shadowCameraFar = shadowCameraFar;
+        spotLight.shadowCameraFov = shadowCameraFov;
+        spotLight.shadowCameraVisible = shadowCameraVisible;
+        spotLight.shadowBias = shadowBias;
+        spotLight.shadowDarkness = shadowDarkness;
+        scene.add(spotLight);
+        
+        /*add loader call add model function*/
+        loader = new THREE.JSONLoader();
+        loader.load( '../models/monkey_ani.json', addModel );
+        $("#webGL-container").append(renderer.domElement);     
+    }
+
+    function addModel( geometry,  materials ){
+        var material = materials[ 0 ];
+        
+        for (var i = 0; i < materials.length; i++)
+        materials[i].morphTargets = true;
+        
+        model = new THREE.Mesh( geometry, material );
+        model.scale.set (10,10,10);
+        scene.add( model );
+        
+        animation = new THREE.MorphAnimation( model );
+        animation.play();
+    }
+    
+    var prevTime = Date.now();
+    
+    function render() { 
+        spotLight.position.x = lightX;
+        spotLight.position.y = lightY;
+        spotLight.position.z = lightZ;
+
+        if ( animation ) {
+            var time = Date.now();
+            animation.update( (time - prevTime)/3 );
+            prevTime = time;
+        }        
+    }
+    
+    function animate(){
+        requestAnimationFrame(animate);
+        render();  
+        renderer.render(scene, camera);
+    }
+    
+    init();
+    animate();
+    
+    $(window).resize(function(){
+        SCREEN_WIDTH = window.innerWidth;
+        SCREEN_HEIGHT = window.innerHeight;
+        camera.aspect = SCREEN_WIDTH / SCREEN_HEIGHT;
+        camera.updateProjectionMatrix();
+        renderer.setSize( SCREEN_WIDTH, SCREEN_HEIGHT );
+    });
+    
+});
+	</script>
+    </body>
+</html>
