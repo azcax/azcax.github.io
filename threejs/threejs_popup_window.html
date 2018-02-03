@@ -25,7 +25,7 @@
     </style>
     
     <body>
-    <a href = "https://wpdildine.github.com" style="position:absolute;top:1%;right:40%;width:20%;z-index:10;color:#000000;text-align:center; text-transform:uppercase;text-decoration:none;">Raycasting Blender Scene Demonstration</a>
+    <a href = "https://wpdildine.github.com" style="position:absolute;top:1%;right:40%;width:20%;z-index:10;color:#000000;text-align:center; text-transform:uppercase;text-decoration:none;"></a>
     <div class="popup"><div class="text"></div></div>
     <div id ="webGL-container" style="z-index:-9;"></div>
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
@@ -157,7 +157,7 @@
             this.name = intersects[ 0 ].object.name;
             
             $( ".text" ).empty();
-            $( ".popup" ).append( "<div class='text'><p>This is the color <strong>#" + this.temp + "</strong> and the name assigned in Blender is <strong>" + this.name  + "</strong></p></div>" );
+            $( ".popup" ).append( "<div class='text'><p>This is the color <strong>#" + this.temp + "</strong> and the name is <strong>" + this.name  + "</strong></p></div>" );
             $(".popup").show();
             
         }
